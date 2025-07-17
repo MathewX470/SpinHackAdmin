@@ -5,21 +5,28 @@ require("dotenv").config();
 const TeamModel = require("./models/Teams");
 
 const URL = process.env.MONGODB_URL;
-const PORT = process.env.PORT || 3001;
+const PORT =3001;
 
 const app = express();
 
-// Allow CORS from your frontend domain
+// Enable CORS for all routes
 app.use(
   cors({
-    origin: "https://spin-hack-admin.vercel.app", // ✅ frontend origin
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: [
+      "https://spin-hack-admin.vercel.app",
+      "http://localhost:3000", // For local development
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
 
+// Explicitly handle preflight requests
+app.options("*", cors());
+
 app.use(express.json());
 
+// Connect to MongoDB
 const connectDB = async () => {
   try {
     await mongoose.connect(URL);
@@ -29,9 +36,9 @@ const connectDB = async () => {
     process.exit(1);
   }
 };
-
 connectDB();
 
+// Get teams endpoint
 app.get("/getTeams", async (req, res) => {
   try {
     const teams = await TeamModel.find();

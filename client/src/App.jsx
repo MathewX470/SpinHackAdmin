@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("https://spin-hack-admin-server.vercel.app/getTeams")
+      .get("/getTeams")
       .then((res) => setTeams(res.data))
       .catch((err) => console.log(err));
   }, []);
