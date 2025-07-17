@@ -1,17 +1,24 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const TeamModel = require("./models/Teams"); // ← updated import
 require("dotenv").config();
+const TeamModel = require("./models/Teams");
+
 const URL = process.env.MONGODB_URL;
-
-
+const PORT = process.env.PORT || 3001;
 
 const app = express();
-app.use(cors());
-app.use(express.json());
 
-const PORT = 3001;
+// Allow CORS from your frontend domain
+app.use(
+  cors({
+    origin: "https://spin-hack-admin.vercel.app", // ✅ frontend origin
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
+app.use(express.json());
 
 const connectDB = async () => {
   try {
