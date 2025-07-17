@@ -1,33 +1,29 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config();
-const TeamModel = require("./models/Teams");
-
-const URL = process.env.MONGODB_URL;
-const PORT =3001;
+const TeamModel = require("./models/Teams"); // ← updated import
 
 const app = express();
-
-// Enable CORS for all routes
 app.use(cors());
-
-
 app.use(express.json());
 
-// Connect to MongoDB
+const PORT = 3001;
+
 const connectDB = async () => {
   try {
-    await mongoose.connect(URL);
+    await mongoose.connect(
+      "mongodb+srv://dinrajdinesh564:FOFzmsf4CsEV3ru7@cluster0.gttvq8n.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+      {}
+    );
     console.log("MongoDB connected successfully");
   } catch (err) {
     console.error("MongoDB connection failed:", err.message);
     process.exit(1);
   }
 };
+
 connectDB();
 
-// Get teams endpoint
 app.get("/getTeams", async (req, res) => {
   try {
     const teams = await TeamModel.find();
