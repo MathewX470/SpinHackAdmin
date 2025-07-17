@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("https://localhost:3001/getTeams")
+      .get("http://localhost:3001/getTeams")
       .then((res) => setTeams(res.data))
       .catch((err) => console.log(err));
   }, []);
