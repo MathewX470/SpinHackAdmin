@@ -10,19 +10,8 @@ const PORT =3001;
 const app = express();
 
 // Enable CORS for all routes
-app.use(
-  cors({
-    origin: [
-      "https://spin-hack-admin.vercel.app",
-      "http://localhost:3000", // For local development
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
-// Explicitly handle preflight requests
-app.options("*", cors());
 
 app.use(express.json());
 
