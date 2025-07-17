@@ -1,20 +1,54 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 function App() {
   const [teams, setTeams] = useState([]);
 
-   useEffect(() => {
-     axios
-       .get("http://localhost:3001/getTeams")
-       .then((res) => setTeams(res.data))
-       .catch((err) => console.log(err));
-   }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/getTeams")
+      .then((res) => setTeams(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  // ✅ Function to download Excel
+  const downloadExcel = () => {
+    const formattedData = teams.map((team) => ({
+      "Team Name": team.teamName,
+      "Team Members": team.members.join(", "),
+      Topic: team.topic,
+      "Created At": new Date(team.createdAt).toLocaleString(),
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(formattedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Teams");
+
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+
+    const blob = new Blob([excelBuffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+
+    saveAs(blob, "Hackathon_Teams.xlsx");
+  };
 
   return (
     <div className="app-wrapper">
       <h1>Hackathon Teams & Topics</h1>
+
+      <div className="download-btn-wrapper">
+        <button onClick={downloadExcel} className="download-btn">
+          📥 Download Excel
+        </button>
+      </div>
+
       <div className="table-card">
         <table className="table table-striped table-hover">
           <thead>
