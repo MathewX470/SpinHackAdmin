@@ -41,12 +41,6 @@ function App() {
 
   return (
     <div className="app-wrapper">
-      <div className="download-btn-wrapper">
-        <button onClick={downloadExcel} className="download-btn">
-          📥 Download Excel
-        </button>
-      </div>
-
       <div className="table-card">
         <table className="table table-striped table-hover">
           <thead>
@@ -68,6 +62,12 @@ function App() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="download-btn-wrapper">
+        <button onClick={downloadExcel} className="download-btn">
+          📥 Download Excel
+        </button>
       </div>
     </div>
   );
