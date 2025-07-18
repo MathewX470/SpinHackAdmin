@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/getTeams")
+      .get("http://localhost:5000/getTeams")
       .then((res) => setTeams(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -41,8 +41,6 @@ function App() {
 
   return (
     <div className="app-wrapper">
-      <h1>Hackathon Teams & Topics</h1>
-
       <div className="download-btn-wrapper">
         <button onClick={downloadExcel} className="download-btn">
           📥 Download Excel

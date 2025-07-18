@@ -16,6 +16,8 @@ body {
   justify-content: flex-end;
   margin-bottom: 20px;
   width: 68%;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .download-btn {
@@ -28,6 +30,8 @@ body {
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 200px;
 }
 
 .download-btn:hover {
@@ -44,6 +48,8 @@ body {
   justify-content: flex-start;
   padding-top: 2rem;
   background-color: #0d1117;
+  padding-top: 10%;
+  padding-bottom: 4%;
 }
 
 /* Page heading */
