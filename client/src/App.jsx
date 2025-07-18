@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/getTeams")
+      .get("https://spinhackadmindevman.onrender.com/getTeams")
       .then((res) => setTeams(res.data))
       .catch((err) => console.log(err));
   }, []);
