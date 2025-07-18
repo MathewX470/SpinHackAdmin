@@ -69,9 +69,16 @@ h1 {
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+  
+  /* Fixed size */
   width: 95%;
   max-width: 1000px;
+  height: 400px; /* You can adjust this height as needed */
+
+  /* Scroll when content overflows */
+  overflow: auto;
 }
+
 
 /* Table styles */
 .table {
