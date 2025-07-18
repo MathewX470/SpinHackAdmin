@@ -35,6 +35,8 @@ app.get("/getTeams", async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => res.status(200).send("server is running!"));
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
